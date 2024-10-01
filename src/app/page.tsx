@@ -1,7 +1,7 @@
 import Link from "next/link";
-import lol1 from "./public/lol1.jpg";
-import lol2 from "./public/lol2.webp";
-import lol3 from "./public/lol3.webp";
+import lol1 from "../public/lol1.jpg";
+import lol2 from "../public/lol2.webp";
+import lol3 from "../public/lol3.webp";
 import Image from "next/image";
 
 export default function Home() {

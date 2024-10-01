@@ -20,13 +20,13 @@ export default function RootLayout({
             <Link href={"/"} className="hover:text-red-600">
               <span className="font-bold text-lg">홈</span>
             </Link>
-            <Link href={"champions"} className="hover:text-red-600">
+            <Link href={"/champions"} className="hover:text-red-600">
               <span className="font-bold text-lg">챔피언 목록</span>
             </Link>
-            <Link href={"items"} className="hover:text-red-600">
+            <Link href={"/items"} className="hover:text-red-600">
               <span className="font-bold text-lg">아이템 목록</span>
             </Link>
-            <Link href={"rotation"} className="hover:text-red-600">
+            <Link href={"/rotation"} className="hover:text-red-600">
               <span className="font-bold text-lg">챔피언 로테이션</span>
             </Link>
           </nav>
