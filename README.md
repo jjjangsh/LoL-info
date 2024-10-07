@@ -23,11 +23,13 @@
 🔼홈
 
 </br>
+</br>
 
 <img src="https://github.com/user-attachments/assets/4c31692c-4bf9-46d2-ba56-124e5798aab4" width="500" height="200"/>
 </br>
 🔼챔피언 목록
 
+</br>
 </br>
 
 <img src="https://github.com/user-attachments/assets/85c93e13-e9d6-43f7-b14b-dc47374050cd" width="500" height="400"/>
@@ -35,17 +37,20 @@
 🔼챔피언 상세보기
 
 </br>
+</br>
 
 <img src="https://github.com/user-attachments/assets/e08e17d1-88c8-4c52-abe3-5899a59be460" width="500" height="300"/>
 </br>
 🔼아이템 목록
 
 </br>
+</br>
 
 <img src="https://github.com/user-attachments/assets/545997c7-db15-45bc-a254-f167635a8f4c" width="500" height="200"/>
 </br>
 🔼로테이션 챔피언 목록
 
+</br>
 </br>
 
 <img src="https://github.com/user-attachments/assets/25154d4f-feb5-4494-b989-ceea19fd6c1e" width="500" height="200"/>
@@ -120,8 +125,44 @@ export default function RootLayout({
  </details>
 
 <details>
+<summary>loading, not-found</summary>
+  - 모든 컴포넌트에 공통으로 로딩 UI 를 적용
+  - Global not-found ( 존재하지 않는 페이지에 접근했을 때 해당 컴포넌트가 렌더링 )
+
+```
+const loading = () => {
+  return (
+    <div className="text-5xl text-white font-bold">로딩중입니다...!⏳⏳⏳</div>
+  );
+};
+
+export default loading;
+```
+
+</br>
+
+```
+const NotFound = () => {
+  return (
+    <div className="text-center mt-[100px]">
+      <h1>404 - 페이지를 찾을 수 없습니다.</h1>
+      <p>페이지가 존재하지 않습니다.</p>
+      <Link href="/" className="text-red-600">
+        홈으로 돌아가기
+      </Link>
+    </div>
+  );
+};
+
+export default NotFound;
+```
+  
+<details>
+
+<details>
 <summary>챔피언 목록페이지(ISR)</summary>
 
+- 모든 챔피언 목록을 보여줌
 - 사용자의 요청이 있을 때, revalidate 옵션에 설정된 시간이 경과하면, 페이지를 서버에서 재생성
 - metadata 설정
 - 에러핸들링
@@ -204,7 +245,8 @@ export default ChampionListPage;
 
 <details>
 <summary>챔피언 상세페이지(SSG)</summary>
- 
+
+ - 챔피언 이름과 설명, 능력치와 보유 스킬을 보여줌
  - 동적 metadata 설정
  - 에러핸들링
 
@@ -323,6 +365,7 @@ export default ChampionDetailPage;
 <details>
 <summary>로테이션 페이지(CSR)</summary>
 
+- 주마다 바뀌는 로테이션에 해당하는 챔피언들만 목록으로 보여줌
 - Route Handlers는 로테이션 페이지에서만 사용하고 /api/rotation 엔드포인트 유지
 - 에러핸들링
 
@@ -496,6 +539,7 @@ export default RotationChampionPage;
 <details>
 <summary>아이템 목록페이지(SSG)</summary>
 
+- 아이템 전부를 목록으로 보여줌
 - 에러핸들링
 
 ```
