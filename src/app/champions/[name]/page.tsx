@@ -1,5 +1,5 @@
 import { Champion } from "@/types/Champions";
-import { getChampionDetail } from "@/utils/serverApi";
+import { getChampionDetail, getVersions } from "@/utils/serverApi";
 import Image from "next/image";
 import React from "react";
 
@@ -18,6 +18,7 @@ export function generateMetadata({ params }: Props) {
 
 const ChampionDetailPage = async ({ params }: { params: { name: string } }) => {
   try {
+    const version = await getVersions();
     const championDetail: Champion = await getChampionDetail(params.name);
 
     if (!championDetail) {
@@ -25,22 +26,59 @@ const ChampionDetailPage = async ({ params }: { params: { name: string } }) => {
     }
 
     return (
-      <div>
-        <p className="text-gray-300">{championDetail.name}</p>
-        <p className="text-gray-300">{championDetail.title}</p>
-        <Image
-          src={`${process.env.NEXT_PUBLIC_BASE_URL}/cdn/img/champion/splash/${championDetail.id}_0.jpg`}
-          alt={`${championDetail.id}이미지`}
-          width={700}
-          height={700}
-        />
-        <span className="text-white">{championDetail.blurb}</span>
-        <div className="text-white">
-          <h3>스탯</h3>
-          <li>{`hp : ${championDetail.stats.hp}`}</li>
-          <li>{`mp : ${championDetail.stats.mp}`}</li>
-          {Object.entries(championDetail.info).map(([key, value]) => (
-            <li key={key}>{`${key} : ${value}`}</li>
+      <div className="flex flex-col">
+        <div className="flex flex-col md:flex-row mb-6 justify-center">
+          <div className="md:w-1/3 mb-4">
+            <Image
+              src={`${process.env.NEXT_PUBLIC_BASE_URL}/cdn/img/champion/splash/${championDetail.id}_0.jpg`}
+              alt={`${championDetail.id} 이미지`}
+              width={700}
+              height={700}
+              className="rounded-lg"
+            />
+          </div>
+
+          <div className="md:w-1/3 md:pl-4">
+            <p className="text-gray-300 text-3xl font-bold">
+              {championDetail.name}
+            </p>
+            <p className="text-lg text-yellow-500">{championDetail.title}</p>
+            <span className="text-white">{championDetail.blurb}</span>
+
+            <div className="mb-6 text-white py-20">
+              <h3 className="text-3xl font-bold mb-2">스탯</h3>
+              <ul>
+                <li>체력: {championDetail.stats.hp}</li>
+                <li>마나: {championDetail.stats.mp}</li>
+                <li>이동 속도: {championDetail.stats.movespeed}</li>
+                <li>방어력: {championDetail.stats.armor}</li>
+                <li>공격력: {championDetail.stats.attackdamage}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="mb-6 text-white flex flex-col">
+          <h3 className="text-2xl font-bold mb-2 relative left-[390px]">
+            스킬
+          </h3>
+          {championDetail.spells.map((spell) => (
+            <div
+              key={spell.id}
+              className="mb-4 flex items-start relative left-[390px]"
+            >
+              <Image
+                src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spell.image.full}`}
+                alt={spell.name}
+                width={64}
+                height={64}
+                className="mr-2"
+              />
+              <div>
+                <h4 className="text-xl font-bold">{spell.name}</h4>
+                <p>{spell.description}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>

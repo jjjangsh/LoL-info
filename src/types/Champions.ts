@@ -14,6 +14,13 @@ export type ChampionList = {
   key: string;
 };
 
+export type Skin = {
+  id: string;
+  num: number;
+  name: string;
+  chromas: boolean;
+};
+
 export type Champion = {
   version: string;
   id: string;
@@ -60,4 +67,35 @@ export type Champion = {
     attackspeedperlevel: number;
     attackspeed: number;
   };
+  spells: [
+    {
+      id: string;
+      name: string;
+      description: string;
+      cooldownBurn: string;
+      image: {
+        full: string;
+        sprite: string;
+        group: string;
+        x: number;
+        y: number;
+        w: number;
+        h: number;
+      };
+    }
+  ];
+  passive: {
+    name: string;
+    description: string;
+    image: {
+      full: string;
+      sprite: string;
+      group: string;
+      x: number;
+      y: number;
+      w: number;
+      h: number;
+    };
+  };
+  skins: Skin[];
 };
