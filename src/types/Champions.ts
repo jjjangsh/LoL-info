@@ -11,6 +11,7 @@ export type ChampionList = {
     w: number;
     h: number;
   };
+  key: string;
 };
 
 export type Champion = {

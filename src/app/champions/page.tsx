@@ -1,41 +1,47 @@
 import React from "react";
 import { getChampions, getVersions } from "@/utils/serverApi";
 import { ChampionList } from "@/types/Champions";
-import Link from "next/link";
-import Image from "next/image";
+import Card from "@/components/Card";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "LOL Champions",
+  description: "League of Legends Champion Information",
+};
 
 const ChampionListPage = async () => {
-  const championList: ChampionList[] = await getChampions();
-  const version: string = await getVersions();
+  try {
+    const championList: ChampionList[] = await getChampions();
+    const version: string = await getVersions();
 
-  return (
-    <>
-      <h1 className="pl-16 font-bold text-red-600 text-3xl">챔피언 목록</h1>
-      <div className="grid grid-cols-6 gap-[15px] p-16">
-        {championList.map((champion) => (
-          <div
-            className="border border-gray-500 text-center"
-            key={champion.name}
-          >
-            <Link href={`/champions/${champion.id}`}>
-              <div className="flex justify-center">
-                <Image
-                  src={`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.id}.png`}
-                  alt={`${champion.id}이미지`}
-                  width={200}
-                  height={200}
-                />
-              </div>
-              <div className="font-bold text-gray-300 text-2xl">
-                {champion.name}
-              </div>
-              <div className="text-gray-300">{champion.title}</div>
-            </Link>
-          </div>
-        ))}
-      </div>
-    </>
-  );
+    if (!championList.length) {
+      return <div>챔피언 목록을 불러오지 못했습니다.</div>;
+    }
+
+    return (
+      <>
+        <h1 className="pl-16 font-bold text-red-600 text-3xl">챔피언 목록</h1>
+        <div className="grid grid-cols-6 gap-[15px] p-16">
+          {championList.map((champion) => (
+            <Card
+              key={champion.id}
+              id={champion.id}
+              name={champion.name}
+              title={champion.title}
+              imageUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/cdn/${version}/img/champion/${champion.id}.png`}
+              linkUrl={`/champions/${champion.id}`}
+              w={200}
+              h={200}
+              hasLink={true}
+            />
+          ))}
+        </div>
+      </>
+    );
+  } catch (err) {
+    console.error("챔피언 목록을 불러오는 중 오류가 발생하였습니다.", err);
+    return <div>챔피언 목록을 불러오는 중 오류가 발생하였습니다.</div>;
+  }
 };
 
 export default ChampionListPage;

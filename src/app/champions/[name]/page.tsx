@@ -17,43 +17,38 @@ export function generateMetadata({ params }: Props) {
 }
 
 const ChampionDetailPage = async ({ params }: { params: { name: string } }) => {
-  const championDetail: Champion = await getChampionDetail(params.name);
-  // const status = () => {
-  //   const result = [];
-  //   for (const [key, value] of Object.entries(championDetail.info)) {
-  //     result.push(
-  //       <li key={key}>
-  //         {" "}
-  //         {key} : {value}{" "}
-  //       </li>
-  //     );
-  //   }
+  try {
+    const championDetail: Champion = await getChampionDetail(params.name);
 
-  //   return result;
-  // };
+    if (!championDetail) {
+      return <div>챔피언 정보를 찾을 수 없습니다.</div>;
+    }
 
-  return (
-    <div>
-      <p className="text-gray-300">{championDetail.name}</p>
-      <p className="text-gray-300">{championDetail.title}</p>
-      <Image
-        src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championDetail.id}_0.jpg`}
-        alt={`${championDetail.id}이미지`}
-        width={700}
-        height={700}
-      />
-      <span className="text-white">{championDetail.blurb}</span>
-      <div className="text-white">
-        <h3>스탯</h3>
-        {/* <ul>{status()}</ul> */}
-        <li>{`hp : ${championDetail.stats.hp}`}</li>
-        <li>{`mp : ${championDetail.stats.mp}`}</li>
-        {Object.entries(championDetail.info).map(([key, value]) => (
-          <li key={key}>{`${key} : ${value}`}</li>
-        ))}
+    return (
+      <div>
+        <p className="text-gray-300">{championDetail.name}</p>
+        <p className="text-gray-300">{championDetail.title}</p>
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BASE_URL}/cdn/img/champion/splash/${championDetail.id}_0.jpg`}
+          alt={`${championDetail.id}이미지`}
+          width={700}
+          height={700}
+        />
+        <span className="text-white">{championDetail.blurb}</span>
+        <div className="text-white">
+          <h3>스탯</h3>
+          <li>{`hp : ${championDetail.stats.hp}`}</li>
+          <li>{`mp : ${championDetail.stats.mp}`}</li>
+          {Object.entries(championDetail.info).map(([key, value]) => (
+            <li key={key}>{`${key} : ${value}`}</li>
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  } catch (err) {
+    console.error("챔피언 정보를 불러오는 중 오류가 발생하였습니다.", err);
+    return <div>챔피언 정보를 불러오는 중 오류가 발생하였습니다.</div>;
+  }
 };
 
 export default ChampionDetailPage;
