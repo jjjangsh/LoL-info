@@ -157,7 +157,7 @@ const NotFound = () => {
 export default NotFound;
 ```
   
-<details>
+</details>
 
 <details>
 <summary>챔피언 목록페이지(ISR)</summary>
