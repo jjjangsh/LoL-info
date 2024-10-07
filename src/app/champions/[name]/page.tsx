@@ -33,7 +33,7 @@ const ChampionDetailPage = async ({ params }: { params: { name: string } }) => {
               src={`${process.env.NEXT_PUBLIC_BASE_URL}/cdn/img/champion/splash/${championDetail.id}_0.jpg`}
               alt={`${championDetail.id} 이미지`}
               width={700}
-              height={700}
+              height={750}
               className="rounded-lg"
             />
           </div>
@@ -45,7 +45,7 @@ const ChampionDetailPage = async ({ params }: { params: { name: string } }) => {
             <p className="text-lg text-yellow-500">{championDetail.title}</p>
             <span className="text-white">{championDetail.blurb}</span>
 
-            <div className="mb-6 text-white py-20">
+            <div className="mb-6 text-white py-[32px]">
               <h3 className="text-3xl font-bold mb-2">스탯</h3>
               <ul>
                 <li>체력: {championDetail.stats.hp}</li>
@@ -58,17 +58,17 @@ const ChampionDetailPage = async ({ params }: { params: { name: string } }) => {
           </div>
         </div>
 
-        <div className="mb-6 text-white flex flex-col">
-          <h3 className="text-2xl font-bold mb-2 relative left-[390px]">
+        <div className="mb-6 text-white flex flex-col max-w-[1500px]">
+          <h3 className="text-2xl font-bold mb-2 relative left-[310px]">
             스킬
           </h3>
           {championDetail.spells.map((spell) => (
             <div
               key={spell.id}
-              className="mb-4 flex items-start relative left-[390px]"
+              className="mb-4 flex items-start relative left-[310px]"
             >
               <Image
-                src={`http://ddragon.leagueoflegends.com/cdn/${version}/img/spell/${spell.image.full}`}
+                src={`${process.env.NEXT_PUBLIC_BASE_URL}/cdn/${version}/img/spell/${spell.image.full}`}
                 alt={spell.name}
                 width={64}
                 height={64}
