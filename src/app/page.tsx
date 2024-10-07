@@ -22,8 +22,8 @@ export default function Home() {
             href={"champions"}
             className="flex flex-col justify-center items-center text-amber-400 font-bold text-2xl hover:text-amber-600"
           >
-            <div className="relative w-[500px] h-[350px]">
-              <Image src={lol1} alt="leftImg" />
+            <div className="">
+              <Image src={lol1} alt="leftImg" width={500} height={300} />
             </div>
             챔피언 목록
           </Link>
@@ -34,8 +34,8 @@ export default function Home() {
             href={"items"}
             className="flex flex-col justify-center items-center text-amber-400 font-bold text-2xl hover:text-amber-600"
           >
-            <div className="relative w-[500px] h-[350px]">
-              <Image src={lol2} alt="centerImg" />
+            <div className="">
+              <Image src={lol2} alt="centerImg" width={500} height={300} />
             </div>
             아이템 목록
           </Link>
@@ -46,8 +46,8 @@ export default function Home() {
             href={"rotation"}
             className="flex flex-col justify-center items-center text-amber-400 font-bold text-2xl hover:text-amber-600"
           >
-            <div className="relative w-[500px] h-[350px]">
-              <Image src={lol3} alt="rightImg" />
+            <div className="">
+              <Image src={lol3} alt="rightImg" width={500} height={300} />
             </div>
             금주 로테이션
           </Link>

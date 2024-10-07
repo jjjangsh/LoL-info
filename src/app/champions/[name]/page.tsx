@@ -32,8 +32,8 @@ const ChampionDetailPage = async ({ params }: { params: { name: string } }) => {
             <Image
               src={`${process.env.NEXT_PUBLIC_BASE_URL}/cdn/img/champion/splash/${championDetail.id}_0.jpg`}
               alt={`${championDetail.id} 이미지`}
-              width={700}
-              height={750}
+              width={800}
+              height={800}
               className="rounded-lg"
             />
           </div>
@@ -58,7 +58,7 @@ const ChampionDetailPage = async ({ params }: { params: { name: string } }) => {
           </div>
         </div>
 
-        <div className="mb-6 text-white flex flex-col max-w-[1500px]">
+        <div className="mb-6 text-white flex flex-col max-w-[1000px]">
           <h3 className="text-2xl font-bold mb-2 relative left-[310px]">
             스킬
           </h3>
