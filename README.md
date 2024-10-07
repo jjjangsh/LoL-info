@@ -130,6 +130,8 @@ export default function RootLayout({
   - Global not-found ( 존재하지 않는 페이지에 접근했을 때 해당 컴포넌트가 렌더링 )
 
 ```
+// app/loading.tsx
+
 const loading = () => {
   return (
     <div className="text-5xl text-white font-bold">로딩중입니다...!⏳⏳⏳</div>
@@ -142,6 +144,8 @@ export default loading;
 </br>
 
 ```
+// app/not-found.tsx
+
 const NotFound = () => {
   return (
     <div className="text-center mt-[100px]">
